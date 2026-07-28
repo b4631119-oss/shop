@@ -73,30 +73,33 @@ const FavoritesCard = ({ phone, onRemove }) => {
           )}
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2.5">
           {inStock ? (
             <a
               href={whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 hover:scale-105 hover:shadow-lg shadow-orange-200 text-center"
+              className="flex-1 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 hover:scale-[1.02] shadow-md shadow-orange-500/20 hover:shadow-lg hover:shadow-orange-500/30 flex items-center justify-center gap-1.5"
             >
-              {t('product.order')}
+              <span>💬</span>
+              <span>{t('product.order')}</span>
             </a>
           ) : (
             <button
               disabled
-              className="flex-1 bg-gray-300 text-gray-500 px-4 py-2 rounded-xl text-sm font-medium cursor-not-allowed"
+              className="flex-1 bg-gray-100 text-gray-400 px-4 py-2.5 rounded-xl text-sm font-medium cursor-not-allowed border border-gray-200 flex items-center justify-center gap-1.5"
             >
-              {t('product.outofstock')}
+              <span>🚫</span>
+              <span>{t('product.outofstock')}</span>
             </button>
           )}
           
           <Link 
             to={`/phones/${id}`}
-            className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 hover:scale-105 text-center min-w-[80px]"
+            className="flex-1 bg-gray-100 hover:bg-orange-50 hover:text-orange-600 text-gray-700 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:scale-[1.02] flex items-center justify-center gap-1.5 border border-gray-200/80 hover:border-orange-200"
           >
-            {t('product.details')}
+            <span>ℹ️</span>
+            <span>{t('product.details')}</span>
           </Link>
         </div>
       </div>

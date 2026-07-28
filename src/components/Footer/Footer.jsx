@@ -12,7 +12,7 @@ const Footer = () => {
 
       {/* Основная часть футера */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
 
           {/* Колонка 1: О магазине */}
           <div className="space-y-4">
@@ -37,10 +37,19 @@ const Footer = () => {
               </a>
               <a
                 href="tel:+996551383739"
-                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-orange-500/10 hover:bg-orange-500/20 border border-orange-500/30 text-orange-400 text-xs font-medium transition-all duration-300 hover:scale-105"
+                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 text-blue-400 text-xs font-medium transition-all duration-300 hover:scale-105"
               >
                 <span className="text-base">📞</span>
                 <span>Позвонить</span>
+              </a>
+              <a
+                href="https://instagram.com/telephone_osh"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-pink-500/10 hover:bg-pink-500/20 border border-pink-500/30 text-pink-400 text-xs font-medium transition-all duration-300 hover:scale-105"
+              >
+                <span className="text-base">📷</span>
+                <span>Instagram</span>
               </a>
             </div>
           </div>
@@ -89,7 +98,7 @@ const Footer = () => {
                 <span>{t('footer.working_hours')}</span>
               </li>
               <li className="flex items-center gap-3">
-                <span className="w-8 h-8 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-400 text-sm shrink-0">📞</span>
+                <span className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-sm shrink-0">📞</span>
                 <a
                   href="tel:+996551383739"
                   className="hover:text-orange-400 transition-colors font-medium"
@@ -108,13 +117,24 @@ const Footer = () => {
                   WhatsApp Чат
                 </a>
               </li>
+              <li className="flex items-center gap-3">
+                <span className="w-8 h-8 rounded-lg bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-400 text-sm shrink-0">📷</span>
+                <a
+                  href="https://instagram.com/telephone_osh"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-pink-400 transition-colors font-medium text-pink-400"
+                >
+                  Instagram
+                </a>
+              </li>
             </ul>
           </div>
 
         </div>
       </div>
 
-      {/* Нижняя часть футера (с учётом отступа для мобильной навигации) */}
+      {/* Нижняя часть футера */}
       <div className="border-t border-gray-800/60 bg-black/40 backdrop-blur-sm py-5 mb-16 md:mb-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-3 text-center sm:text-left text-xs sm:text-sm text-gray-400">
           <p>© 2026 Telephone Osh. {t('footer.rights')}.</p>

@@ -71,17 +71,6 @@ const PhoneCard = ({ phone }) => {
             {name}
           </h1>
 
-          <div className="flex items-center gap-2 mb-4">
-            <div className="flex text-yellow-400">
-              {[...Array(5)].map((_, i) => (
-                <svg key={i} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill={i < Math.round(rating || 0) ? "#f59e0b" : "#e5e7eb"} className="w-5 h-5">
-                  <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clipRule="evenodd" />
-                </svg>
-              ))}
-            </div>
-            <span className="text-gray-500 text-sm">({rating || 0})</span>
-          </div>
-
           <div className="flex items-center gap-4 mb-6">
             <span className="text-3xl md:text-4xl font-bold text-orange-500">
               {formatPrice(price)} сом
@@ -103,24 +92,27 @@ const PhoneCard = ({ phone }) => {
                 href={whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200 hover:scale-105 hover:shadow-lg shadow-orange-200 text-center"
+                className="flex-1 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white px-6 py-3.5 rounded-xl font-semibold transition-all duration-200 hover:scale-[1.02] shadow-lg shadow-orange-500/25 hover:shadow-xl hover:shadow-orange-500/35 flex items-center justify-center gap-2"
               >
-                {t('detail.order_whatsapp')}
+                <span>💬</span>
+                <span>{t('detail.order_whatsapp')}</span>
               </a>
             ) : (
               <button
                 disabled
-                className="flex-1 bg-gray-300 text-gray-500 px-6 py-3 rounded-xl font-semibold cursor-not-allowed"
+                className="flex-1 bg-gray-100 text-gray-400 px-6 py-3.5 rounded-xl font-medium cursor-not-allowed border border-gray-200 flex items-center justify-center gap-2"
               >
-                {t('product.outofstock')}
+                <span>🚫</span>
+                <span>{t('product.outofstock')}</span>
               </button>
             )}
             
             <button
               onClick={handleAddToFavorites}
-              className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3 rounded-xl font-semibold transition-all duration-200 hover:scale-105"
+              className="flex-1 bg-gray-100 hover:bg-orange-50 hover:text-orange-600 text-gray-700 px-6 py-3.5 rounded-xl font-semibold transition-all duration-200 hover:scale-[1.02] border border-gray-200 hover:border-orange-200 flex items-center justify-center gap-2"
             >
-              {t('detail.add_favorite')}
+              <span>❤️</span>
+              <span>{t('detail.add_favorite')}</span>
             </button>
           </div>
 

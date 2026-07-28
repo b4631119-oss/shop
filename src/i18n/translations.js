@@ -26,7 +26,7 @@ export const translations = {
     // Карточка товара
     'product.outofstock': 'Нет в наличии',
     'product.details': 'Подробнее',
-    'product.order': '💬 Заказать',
+    'product.order': ' Заказать',
     'product.added': 'Товар добавлен в избранное!',
     'product.removed': 'Товар удален из избранного!',
     'product.already': 'Этот товар уже в избранном!',
@@ -42,8 +42,8 @@ export const translations = {
     
     // Детальная страница
     'detail.back': '← Назад к каталогу',
-    'detail.order_whatsapp': '💬 Заказать в WhatsApp',
-    'detail.add_favorite': '❤️ В избранное',
+    'detail.order_whatsapp': ' Заказать в WhatsApp',
+    'detail.add_favorite': ' В избранное',
     
     // Категории и заголовки
     'catalog.title': '📱 Каталог товаров',
@@ -55,6 +55,7 @@ export const translations = {
     'category.accessories': 'Аксессуары',
     'catalog.empty_title': 'Товаров не найдено',
     'catalog.empty_desc': 'Попробуйте выбрать другую категорию',
+    'detail.condition': 'Состояние',
     'detail.not_found': 'Товар не найден',
     'detail.no_description': 'Описание товара отсутствует',
 
@@ -104,7 +105,7 @@ export const translations = {
     // Карточка товара
     'product.outofstock': 'Mavjud emas',
     'product.details': 'Batafsil',
-    'product.order': '💬 Buyurtma berish',
+    'product.order': ' Buyurtma berish',
     'product.added': 'Mahsulot sevimlilarga qo\'shildi!',
     'product.removed': 'Mahsulot sevimlilardan olib tashlandi!',
     'product.already': 'Bu mahsulot allaqachon sevimlilarda!',
@@ -120,8 +121,8 @@ export const translations = {
     
     // Детальная страница
     'detail.back': '← Katalogga qaytish',
-    'detail.order_whatsapp': '💬 WhatsApp da buyurtma berish',
-    'detail.add_favorite': '❤️ Sevimlilarga qo\'shish',
+    'detail.order_whatsapp': ' WhatsApp da buyurtma berish',
+    'detail.add_favorite': ' Sevimlilarga qo\'shish',
     
     // Категории и заголовки
     'catalog.title': '📱 Mahsulotlar katalogi',
@@ -133,6 +134,7 @@ export const translations = {
     'category.accessories': 'Aksessuarlar',
     'catalog.empty_title': 'Mahsulotlar topilmadi',
     'catalog.empty_desc': 'Boshqa kategoriyani tanlab ko\'ring',
+    'detail.condition': 'Holati',
     'detail.not_found': 'Mahsulot topilmadi',
     'detail.no_description': 'Mahsulot tavsifi yo\'q',
 
@@ -182,7 +184,7 @@ export const translations = {
     // Карточка товара
     'product.outofstock': 'Мавжуд эмас',
     'product.details': 'Батафсил',
-    'product.order': '💬 Буюртма бериш',
+    'product.order': ' Буюртма бериш',
     'product.added': 'Маҳсулот севимлиларга қўшилди!',
     'product.removed': 'Маҳсулот севимлилардан олиб ташланди!',
     'product.already': 'Бу маҳсулот аллақачон севимлиларда!',
@@ -198,8 +200,8 @@ export const translations = {
     
     // Детальная страница
     'detail.back': '← Каталогга қайтиш',
-    'detail.order_whatsapp': '💬 WhatsApp да буюртма бериш',
-    'detail.add_favorite': '❤️ Севимлиларга қўшиш',
+    'detail.order_whatsapp': ' WhatsApp да буюртма бериш',
+    'detail.add_favorite': ' Севимлиларга қўшиш',
     
     // Категории и заголовки
     'catalog.title': '📱 Маҳсулотлар каталоги',
@@ -211,6 +213,7 @@ export const translations = {
     'category.accessories': 'Аксессуарлар',
     'catalog.empty_title': 'Маҳсулотлар топилмади',
     'catalog.empty_desc': 'Бошқа категорияни танлаб кўринг',
+    'detail.condition': 'Ҳолати',
     'detail.not_found': 'Маҳсулот топилмади',
     'detail.no_description': 'Маҳсулот тавсифи йўқ',
 
@@ -260,7 +263,7 @@ export const translations = {
     // Карточка товара
     'product.outofstock': 'Жок',
     'product.details': 'Толугураак',
-    'product.order': '💬 Заказ кылуу',
+    'product.order': ' Заказ кылуу',
     'product.added': 'Товар сүйүктүүлөргө кошулду!',
     'product.removed': 'Товар сүйүктүүлөрдөн алынды!',
     'product.already': 'Бул товар буга чейин сүйүктүүлөрдө!',
@@ -276,8 +279,8 @@ export const translations = {
     
     // Детальная страница
     'detail.back': '← Каталогго кайтуу',
-    'detail.order_whatsapp': '💬 WhatsApp аркылуу заказ кылуу',
-    'detail.add_favorite': '❤️ Сүйүктүүлөргө кошуу',
+    'detail.order_whatsapp': ' WhatsApp аркылуу заказ кылуу',
+    'detail.add_favorite': ' Сүйүктүүлөргө кошуу',
     
     // Категории и заголовки
     'catalog.title': '📱 Товарлардын каталогу',
@@ -289,6 +292,7 @@ export const translations = {
     'category.accessories': 'Аксессуарлар',
     'catalog.empty_title': 'Товарлар табылган жок',
     'catalog.empty_desc': 'Башка категорияны тандап көрүңүз',
+    'detail.condition': 'Абалы',
     'detail.not_found': 'Товар табылган жок',
     'detail.no_description': 'Товардын сүрөттөмөсү жок',
 
@@ -308,7 +312,7 @@ export const translations = {
     'footer.contact_us': 'Биз менен байланышыңыз',
     'footer.address': 'Ош ш., Кыргызстан',
     'footer.working_hours': 'Дү-Жу: 9:00 - 20:00',
-    'footer.rights': 'Бардык укуктар корголгон',
+    'footer.rights' : 'Бардык укуктар корголгон',
     'footer.developed': '❤️ менен иштелип чыккан',
     'footer.language': 'Тил',
   }

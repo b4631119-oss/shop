@@ -11,9 +11,6 @@ const Phones = ({ phones }) => {
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">
           {t('catalog.title')}
         </h1>
-        <p className="text-gray-500 mt-2 text-sm sm:text-base">
-          {phones?.length || 0} {t('catalog.in_stock')}
-        </p>
       </div>
 
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6'>
