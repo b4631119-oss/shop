@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import PhonesCard from '../PhonesCard/PhonesCard';
+import PhonesCard from '../../components/Phones/PhonesCard';
 
 const PhonesList = ({ phones }) => {
   if (!phones || phones.length === 0) {
