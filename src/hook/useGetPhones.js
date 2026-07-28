@@ -6,7 +6,7 @@ const useGetPhones = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('/products.json')  // или /phones.json
+    fetch('/phones.json')
       .then(res => {
         if (!res.ok) {
           throw new Error('Ошибка загрузки данных');

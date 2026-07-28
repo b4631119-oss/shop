@@ -78,25 +78,6 @@
     "inStock": true,
     "image": "https://images.unsplash.com/photo-1603351154351-5e2d0600bb77?w=400&h=400&fit=crop",
     "description": "Качественный звук, активное шумоподавление и удобная посадка"
-  },
-  {
-    "id": 9,
-    "name": "Быстрая зарядка 45W GaN",
-    "category": "Аксессуары",
-    "price": 2000,
-    "oldPrice": null,
-    "inStock": true,
-    "image": "https://images.unsplash.com/photo-1585336261022-680e295ce3fe?w=400&h=400&fit=crop",
-    "description": "Компактная зарядка с технологией GaN, быстрая зарядка всех устройств"
-  },
-  {
-    "id": 10,
-    "name": "Подушка-подставка для телефона Кот",
-    "category": "Аксессуары",
-    "price": 450,
-    "oldPrice": 600,
-    "inStock": true,
-    "image": "https://images.unsplash.com/photo-1611498362164-ae94e6b35e72?w=400&h=400&fit=crop",
-    "description": "Мягкая подставка для телефона в виде котика, удобно смотреть видео"
   }
+
 ]

@@ -16,17 +16,17 @@ const myCreatedRoute = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-        loader: () => fetch('/products.json') // или /phones.json
+        loader: () => fetch('/phones.json') // или /phones.json
       },
       {
         path: "/phones",
         element: <Phones />,
-        loader: () => fetch('/products.json')
+        loader: () => fetch('/phones.json')
       },
       {
         path: "/accessories",
         element: <Accessories />,
-        loader: () => fetch('/products.json')
+        loader: () => fetch('/phones.json')
       },
       {
         path: "/favorites",
@@ -35,7 +35,7 @@ const myCreatedRoute = createBrowserRouter([
       {
         path: "/phones/:id",
         element: <Phone />,
-        loader: () => fetch('/products.json')
+        loader: () => fetch('/phones.json')
       }
     ]
   }
