@@ -1,10 +1,12 @@
+// src/pages/Favorites/Favorites.jsx
+import FavoritesCard from "./FavoritesCard"
 import  { useEffect, useState } from "react";
-import FavoritesCard from "./FavoritesCard";
 import { Link } from "react-router-dom";
+import { useTranslation } from "../../hook/useTranslation";
 
 const Favorites = () => {
+  const { t } = useTranslation();
   const [favorites, setFavorites] = useState([]);
-  const [isShow, setIsShow] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
@@ -41,13 +43,13 @@ const Favorites = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <div className="text-center py-20">
           <div className="text-6xl mb-4">❤️</div>
-          <h2 className="text-2xl font-semibold text-gray-700">Избранное пусто</h2>
-          <p className="text-gray-500 mt-2">Добавьте товары в избранное, чтобы они появились здесь</p>
+          <h2 className="text-2xl font-semibold text-gray-700">{t('favorites.empty')}</h2>
+          <p className="text-gray-500 mt-2">{t('favorites.empty_desc')}</p>
           <Link
             to="/"
             className="inline-block mt-6 bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-medium transition-all hover:scale-105"
           >
-            Перейти в каталог
+            {t('favorites.go_catalog')}
           </Link>
         </div>
       </div>
@@ -59,10 +61,10 @@ const Favorites = () => {
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
-            ❤️ Избранное
+            {t('favorites.title')}
           </h1>
           <p className="text-gray-500 text-sm mt-1">
-            {favorites.length} товаров на сумму {formatPrice(totalPrice)} сом
+            {favorites.length} {t('favorites.total')} {formatPrice(totalPrice)} сом
           </p>
         </div>
         
@@ -71,13 +73,13 @@ const Favorites = () => {
             onClick={handleRemoveAll}
             className="bg-red-500 hover:bg-red-600 text-white px-6 py-2.5 rounded-xl text-sm font-medium transition-all hover:scale-105"
           >
-            🗑️ Очистить всё
+            {t('favorites.clear')}
           </button>
         )}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-        {(isShow ? favorites : favorites.slice(0, 4)).map((phone) => (
+        {favorites.map((phone) => (
           <FavoritesCard 
             key={phone.id} 
             phone={phone} 
@@ -85,17 +87,6 @@ const Favorites = () => {
           />
         ))}
       </div>
-
-      {favorites.length > 4 && (
-        <div className="text-center mt-8">
-          <button
-            onClick={() => setIsShow(!isShow)}
-            className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-xl font-medium transition-all hover:scale-105"
-          >
-            {isShow ? "📕 Скрыть" : "📖 Показать все"}
-          </button>
-        </div>
-      )}
     </div>
   );
 };

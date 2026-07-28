@@ -1,8 +1,11 @@
+// src/pages/Phone/PhoneCard.jsx
 import PropTypes from 'prop-types';
 import swal from "sweetalert";
 import { Link } from "react-router-dom";
+import { useTranslation } from '../../hooks/useTranslation';
 
 const PhoneCard = ({ phone }) => {
+  const { t } = useTranslation();
   const { id, name, category, price, oldPrice, inStock, image, description, rating } = phone || {};
 
   const handleAddToFavorites = () => {
@@ -13,9 +16,9 @@ const PhoneCard = ({ phone }) => {
     if (!isExists) {
       favoriteItems.push(phone);
       localStorage.setItem("favorites", JSON.stringify(favoriteItems));
-      swal("Успешно!", "Товар добавлен в избранное!", "success");
+      swal(t('product.added'), "", "success");
     } else {
-      swal("Ошибка!", "Этот товар уже в избранном!", "error");
+      swal(t('product.already'), "", "error");
     }
   };
 
@@ -48,7 +51,7 @@ const PhoneCard = ({ phone }) => {
           />
           {!inStock && (
             <div className="absolute top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
-              Нет в наличии
+              {t('product.outofstock')}
             </div>
           )}
           {oldPrice && inStock && (
@@ -103,14 +106,14 @@ const PhoneCard = ({ phone }) => {
                 rel="noopener noreferrer"
                 className="flex-1 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200 hover:scale-105 hover:shadow-lg shadow-orange-200 text-center"
               >
-                💬 Заказать в WhatsApp
+                {t('detail.order_whatsapp')}
               </a>
             ) : (
               <button
                 disabled
                 className="flex-1 bg-gray-300 text-gray-500 px-6 py-3 rounded-xl font-semibold cursor-not-allowed"
               >
-                Нет в наличии
+                {t('product.outofstock')}
               </button>
             )}
             
@@ -118,12 +121,12 @@ const PhoneCard = ({ phone }) => {
               onClick={handleAddToFavorites}
               className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3 rounded-xl font-semibold transition-all duration-200 hover:scale-105"
             >
-              ❤️ В избранное
+              {t('detail.add_favorite')}
             </button>
           </div>
 
           <Link to="/" className="inline-block mt-6 text-orange-500 hover:text-orange-600 font-medium">
-            ← Назад к каталогу
+            {t('detail.back')}
           </Link>
         </div>
       </div>

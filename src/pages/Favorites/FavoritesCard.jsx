@@ -1,8 +1,11 @@
+// src/components/FavoritesCard/FavoritesCard.jsx
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useTranslation } from '../../hook/useTranslation';
 
 const FavoritesCard = ({ phone, onRemove }) => {
-  const { id, name, category, price, oldPrice, inStock, image,  } = phone || {};
+  const { t } = useTranslation();
+  const { id, name, category, price, oldPrice, inStock, image } = phone || {};
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('ru-RU').format(price);
@@ -14,7 +17,6 @@ const FavoritesCard = ({ phone, onRemove }) => {
     }
   };
 
-  // Ссылка для WhatsApp
   const whatsappLink = `https://wa.me/996551383739?text=Здравствуйте!%20Хочу%20купить:%20${name}%20за%20${formatPrice(price)}%20сом`;
 
   if (!phone || !name) {
@@ -24,13 +26,14 @@ const FavoritesCard = ({ phone, onRemove }) => {
   return (
     <div className="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden">
       <div className="relative h-48 sm:h-56 overflow-hidden bg-gray-100">
-        <img 
-          src={image} 
-          alt={name} 
-          className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500"
-        />
+        <Link to={`/phones/${id}`}>
+          <img 
+            src={image} 
+            alt={name} 
+            className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500"
+          />
+        </Link>
         
-        {/* Кнопка удаления */}
         <button
           onClick={handleRemove}
           className="absolute top-3 right-3 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full transition-all hover:scale-110 shadow-lg"
@@ -41,7 +44,6 @@ const FavoritesCard = ({ phone, onRemove }) => {
           </svg>
         </button>
 
-        {/* Бейдж со скидкой */}
         {oldPrice && inStock && (
           <div className="absolute top-3 left-3 bg-orange-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
             -{Math.round(((oldPrice - price) / oldPrice) * 100)}%
@@ -79,22 +81,22 @@ const FavoritesCard = ({ phone, onRemove }) => {
               rel="noopener noreferrer"
               className="flex-1 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 hover:scale-105 hover:shadow-lg shadow-orange-200 text-center"
             >
-              💬 Заказать
+              {t('product.order')}
             </a>
           ) : (
             <button
               disabled
               className="flex-1 bg-gray-300 text-gray-500 px-4 py-2 rounded-xl text-sm font-medium cursor-not-allowed"
             >
-              Нет в наличии
+              {t('product.outofstock')}
             </button>
           )}
           
           <Link 
             to={`/phones/${id}`}
-            className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 hover:scale-105 text-center"
+            className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 hover:scale-105 text-center min-w-[80px]"
           >
-            📄
+            {t('product.details')}
           </Link>
         </div>
       </div>
@@ -111,7 +113,6 @@ FavoritesCard.propTypes = {
     oldPrice: PropTypes.number,
     inStock: PropTypes.bool.isRequired,
     image: PropTypes.string.isRequired,
-    description: PropTypes.string,
   }).isRequired,
   onRemove: PropTypes.func.isRequired,
 };
