@@ -5,7 +5,7 @@ import { useTranslation } from '../../hook/useTranslation';
 
 const PhoneCard = ({ phone }) => {
   const { t } = useTranslation();
-  const { id, name, category, price, oldPrice, inStock, image, description, rating } = phone || {};
+  const { id, name, category, price, oldPrice, inStock, image, description,  } = phone || {};
 
   const handleAddToFavorites = () => {
     const favoriteItems = JSON.parse(localStorage.getItem("favorites")) || [];
