@@ -10,12 +10,16 @@ const Favorites = () => {
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    const favoriteItems = JSON.parse(localStorage.getItem("favorites")) || [];
-
-    if (favoriteItems.length > 0) {
-      setFavorites(favoriteItems);
-      const total = favoriteItems.reduce((prev, current) => prev + current.price, 0);
-      setTotalPrice(total);
+    try {
+      const favoriteItems = JSON.parse(localStorage.getItem("favorites")) || [];
+      if (Array.isArray(favoriteItems) && favoriteItems.length > 0) {
+        setFavorites(favoriteItems);
+        const total = favoriteItems.reduce((prev, current) => prev + (current.price || 0), 0);
+        setTotalPrice(total);
+      }
+    } catch (e) {
+      console.error("Error reading favorites from localStorage", e);
+      setFavorites([]);
     }
   }, []);
 

@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 import swal from "sweetalert";
 import { Link } from "react-router-dom";
-import { useTranslation } from '../../hooks/useTranslation';
+import { useTranslation } from '../../hook/useTranslation';
 
 const PhoneCard = ({ phone }) => {
   const { t } = useTranslation();
