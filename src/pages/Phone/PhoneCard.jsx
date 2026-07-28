@@ -1,4 +1,3 @@
-// src/pages/Phone/PhoneCard.jsx
 import PropTypes from 'prop-types';
 import swal from "sweetalert";
 import { Link } from "react-router-dom";
