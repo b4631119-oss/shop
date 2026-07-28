@@ -67,7 +67,7 @@ const Banner = () => {
               <div className="relative bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 transform hover:scale-105 transition-transform duration-500 shadow-orange-300/50">
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6">
                   <div className="text-6xl sm:text-7xl md:text-8xl text-center mb-2 filter drop-shadow-lg">
-                    📱
+                    <img src="/iphone.jpeg" alt="" />
                   </div>
                   <div className="bg-orange-500/30 backdrop-blur-sm rounded-lg sm:rounded-xl p-2 sm:p-3 text-center">
                     <p className="text-white font-bold text-base sm:text-lg">iPhone 15 Pro</p>
