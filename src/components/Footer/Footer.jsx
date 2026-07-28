@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from '../../hook/useTranslation';
-import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 
 const Footer = () => {
   const { t } = useTranslation();
