@@ -32,7 +32,7 @@ const PhoneCard = ({ phone }) => {
       <div className="flex justify-center items-center h-[60vh]">
         <div className="text-center">
           <div className="text-6xl mb-4">🔍</div>
-          <h2 className="text-2xl font-semibold text-gray-700">Товар не найден</h2>
+          <h2 className="text-2xl font-semibold text-gray-700">{t('detail.not_found')}</h2>
         </div>
       </div>
     );
@@ -63,7 +63,7 @@ const PhoneCard = ({ phone }) => {
         <div className="p-6 md:p-8 lg:p-10">
           <div className="mb-2">
             <span className="text-orange-500 font-medium text-sm uppercase tracking-wider">
-              {category}
+              {category === "Смартфоны" ? t('category.smartphones') : category === "Аксессуары" ? t('category.accessories') : category}
             </span>
           </div>
 
@@ -94,7 +94,7 @@ const PhoneCard = ({ phone }) => {
           </div>
 
           <p className="text-gray-600 leading-relaxed mb-6">
-            {description || "Описание товара отсутствует"}
+            {description || t('detail.no_description')}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3">

@@ -6,7 +6,7 @@ const Phones = () => {
   
   const filteredPhones = phones?.filter(phone => phone.category === "Смартфоны") || [];
 
-  return <PhonesList phones={filteredPhones} />;
+  return <PhonesList phones={filteredPhones} titleKey="catalog.phones" />;
 };
 
 export default Phones;

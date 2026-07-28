@@ -1,14 +1,17 @@
 import PropTypes from 'prop-types';
 import PhonesCard from '../../components/Phones/PhonesCard';
+import { useTranslation } from '../../hook/useTranslation';
 
-const PhonesList = ({ phones }) => {
+const PhonesList = ({ phones, titleKey = 'catalog.all' }) => {
+  const { t } = useTranslation();
+
   if (!phones || phones.length === 0) {
     return (
       <div className="flex justify-center items-center h-[60vh]">
         <div className="text-center">
           <div className="text-6xl mb-4">🔍</div>
-          <h2 className="text-2xl font-semibold text-gray-700">Товаров не найдено</h2>
-          <p className="text-gray-500 mt-2">Попробуйте выбрать другую категорию</p>
+          <h2 className="text-2xl font-semibold text-gray-700">{t('catalog.empty_title')}</h2>
+          <p className="text-gray-500 mt-2">{t('catalog.empty_desc')}</p>
         </div>
       </div>
     );
@@ -18,10 +21,10 @@ const PhonesList = ({ phones }) => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       <div className="text-center mb-8 sm:mb-12">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">
-          📱 Все товары
+          {t(titleKey)}
         </h1>
         <p className="text-gray-500 mt-2 text-sm sm:text-base">
-          {phones.length} товаров в наличии
+          {phones.length} {t('catalog.in_stock')}
         </p>
       </div>
 

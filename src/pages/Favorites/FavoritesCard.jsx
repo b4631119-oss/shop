@@ -53,7 +53,7 @@ const FavoritesCard = ({ phone, onRemove }) => {
 
       <div className="p-4">
         <p className="text-xs text-orange-500 font-medium uppercase tracking-wider mb-1">
-          {category}
+          {category === "Смартфоны" ? t('category.smartphones') : category === "Аксессуары" ? t('category.accessories') : category}
         </p>
 
         <Link to={`/phones/${id}`}>
