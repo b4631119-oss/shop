@@ -1,30 +1,37 @@
+// src/layout/MainLayout.jsx
 import { Outlet, useLocation } from "react-router-dom";
-import Navbar from "../components/Header/Navbar/Navbar";
-import BottomNav from "../components/Navigation/BottomNav";
 import { useEffect } from "react";
+import Navbar from "../components/Header/Navbar/Navbar"
+import Footer from "../components/Footer/Footer";
+import BottomNav from "../components/Navigation/BottomNav";
 
 const MainLayout = () => {
-  const loc = useLocation();
+  const location = useLocation();
 
   useEffect(() => {
-    if (loc.pathname === "/") {
-      document.title = `Telephone Osh`;
-    } else {
-      document.title = `Telephone ${loc.pathname.replace("/", " ")}`;
-    }
+    const pageNames = {
+      '/': 'Главная',
+      '/phones': 'Телефоны',
+      '/accessories': 'Аксессуары',
+      '/favorites': 'Избранное',
+    };
 
-    if (loc.state) {
-      document.title = ` ${loc.state}`;
-    }
-  }, [loc.pathname, loc.state]);
+    const pageName = pageNames[location.pathname] || 'Telephone Osh';
+    document.title = `Telephone Osh - ${pageName}`;
+  }, [location.pathname]);
 
   return (
-    <div className="max-w-[1300px] mx-auto min-h-screen flex flex-col pb-20 md:pb-6">
+    <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
-      <div className="flex-1 py-4 sm:py-6 md:py-10 px-2 sm:px-4">
-        <Outlet context={{ name: "hasib" }} />
+      <main className="flex-1 pb-20 md:pb-0">
+        <Outlet />
+      </main>
+      <Footer />
+      
+      {/* Нижняя навигация для мобилок (если нужна) */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50">
+        <BottomNav />
       </div>
-      <BottomNav />
     </div>
   );
 };

@@ -1,4 +1,3 @@
-// src/components/Banner/Banner.jsx
 import { useTranslation } from "../../../hook/useTranslation";
 
 const Banner = () => {
@@ -28,7 +27,7 @@ const Banner = () => {
             
             <div className="flex flex-wrap gap-3 md:gap-4">
               <a
-                href="#catalog"
+                href="/phones"
                 className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-6 md:px-8 py-2.5 md:py-3 rounded-full text-sm md:text-base font-medium transition-all duration-200 hover:scale-105 hover:shadow-lg shadow-orange-200"
               >
                 {t('banner.btn.catalog')}
@@ -45,7 +44,7 @@ const Banner = () => {
 
             <div className="flex gap-6 md:gap-8 pt-2 md:pt-4">
               <div>
-                <div className="text-xl md:text-2xl font-bold text-orange-500">500+</div>
+                <div className="text-xl md:text-2xl font-bold text-orange-500">100+</div>
                 <div className="text-xs md:text-sm text-gray-500">{t('banner.stats.products')}</div>
               </div>
               <div>
@@ -58,7 +57,6 @@ const Banner = () => {
               </div>
             </div>
           </div>
-
           <div className="flex justify-center items-center order-1 md:order-2">
             <div className="relative w-full max-w-[280px] sm:max-w-[320px] md:max-w-full">
               <div className="absolute -top-10 -left-10 w-60 h-60 sm:w-80 sm:h-80 bg-orange-300 rounded-full opacity-20 animate-pulse"></div>
@@ -70,7 +68,7 @@ const Banner = () => {
                     <img src="/iphone.jpeg" alt="" />
                   </div>
                   <div className="bg-orange-500/30 backdrop-blur-sm rounded-lg sm:rounded-xl p-2 sm:p-3 text-center">
-                    <p className="text-white font-bold text-base sm:text-lg">iPhone 15 Pro</p>
+                    <p className="text-white font-bold text-base sm:text-lg">iPhone 17 Pro</p>
                     <p className="text-orange-100 text-xs sm:text-sm">Оранжевый титан</p>
                     <div className="flex justify-center gap-1 mt-2">
                       <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full"></span>

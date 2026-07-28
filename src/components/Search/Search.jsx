@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
+import { useTranslation } from "../../hook/useTranslation";
 
 const Search = ({ phones }) => {
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -61,7 +63,7 @@ const Search = ({ phones }) => {
           onFocus={() => {
             if (searchTerm.length > 0) setIsOpen(true);
           }}
-          placeholder="🔍 Поиск телефонов, аксессуаров..."
+          placeholder={t('search.placeholder')}
           className="w-full px-4 py-2.5 pr-12 rounded-full border-2 border-gray-200 focus:border-orange-400 focus:outline-none transition-all duration-200 bg-white/90 backdrop-blur-sm text-sm"
         />
         <button
@@ -109,7 +111,7 @@ const Search = ({ phones }) => {
                 </div>
               </div>
               {!phone.inStock && (
-                <span className="text-xs text-red-500 font-medium">Нет в наличии</span>
+                <span className="text-xs text-red-500 font-medium">{t('product.outofstock')}</span>
               )}
             </Link>
           ))}
@@ -120,8 +122,8 @@ const Search = ({ phones }) => {
       {isOpen && searchTerm.length > 0 && results.length === 0 && (
         <div className="absolute top-full mt-2 left-0 right-0 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-50 p-6 text-center">
           <div className="text-4xl mb-2">🔍</div>
-          <p className="text-gray-500">Ничего не найдено</p>
-          <p className="text-sm text-gray-400 mt-1">Попробуйте изменить запрос</p>
+          <p className="text-gray-500">{t('search.not_found')}</p>
+          <p className="text-sm text-gray-400 mt-1">{t('search.try_change')}</p>
         </div>
       )}
     </div>

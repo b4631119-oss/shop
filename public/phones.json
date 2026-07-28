@@ -51,16 +51,6 @@
   },
   {
     "id": 6,
-    "name": "Защитное стекло 9H для iPhone",
-    "category": "Аксессуары",
-    "price": 350,
-    "oldPrice": null,
-    "inStock": true,
-    "image": "https://images.unsplash.com/photo-1565849904461-7ec686be75b0?w=400&h=400&fit=crop",
-    "description": "Прочное закаленное стекло с твердостью 9H, защита от царапин"
-  },
-  {
-    "id": 7,
     "name": "Силиконовый чехол MagSafe",
     "category": "Аксессуары",
     "price": 1500,
@@ -70,7 +60,7 @@
     "description": "Оригинальный силиконовый чехол с поддержкой MagSafe"
   },
   {
-    "id": 8,
+    "id": 7,
     "name": "Беспроводные наушники AirPods Pro 2",
     "category": "Аксессуары",
     "price": 12000,

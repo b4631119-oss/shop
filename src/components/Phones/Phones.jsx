@@ -1,15 +1,18 @@
 import PropTypes from 'prop-types';
 import PhonesCard from './PhonesCard';
+import { useTranslation } from '../../hook/useTranslation';
 
 const Phones = ({ phones }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       <div className="text-center mb-8 sm:mb-12">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">
-          📱 Каталог товаров
+          {t('catalog.title')}
         </h1>
         <p className="text-gray-500 mt-2 text-sm sm:text-base">
-          {phones?.length || 0} товаров в наличии
+          {phones?.length || 0} {t('catalog.in_stock')}
         </p>
       </div>
 

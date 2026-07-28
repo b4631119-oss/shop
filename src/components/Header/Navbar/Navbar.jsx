@@ -1,8 +1,11 @@
 import { NavLink } from "react-router-dom";
 import Logo from "./Logo";
 import LanguageSwitcher from "../../LanguageSwitcher/LanguageSwitcher";
+import { useTranslation } from "../../../hook/useTranslation";
 
 const Navbar = () => {
+  const { t } = useTranslation();
+
   return (
     <nav className="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -30,7 +33,7 @@ const Navbar = () => {
                 }`
               }
             >
-              Главная
+              {t('nav.home')}
             </NavLink>
 
             <NavLink
@@ -43,7 +46,7 @@ const Navbar = () => {
                 }`
               }
             >
-              Телефоны
+              {t('nav.phones')}
             </NavLink>
 
             <NavLink
@@ -56,7 +59,7 @@ const Navbar = () => {
                 }`
               }
             >
-              Аксессуары
+              {t('nav.accessories')}
             </NavLink>
 
             <NavLink
@@ -69,7 +72,7 @@ const Navbar = () => {
                 }`
               }
             >
-              <span>❤️ Избранное</span>
+              <span>❤️ {t('nav.favorites')}</span>
             </NavLink>
 
             <a
@@ -79,7 +82,7 @@ const Navbar = () => {
               className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 hover:scale-105 hover:shadow-lg shadow-orange-200 flex items-center gap-2 whitespace-nowrap"
             >
               <span>💬</span>
-              <span>Связаться</span>
+              <span>{t('nav.contact')}</span>
             </a>
 
             {/* ✅ Переключатель языка */}
