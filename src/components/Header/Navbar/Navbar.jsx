@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import Logo from "./Logo";
+import LanguageSwitcher from "../../LanguageSwitcher/LanguageSwitcher";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -80,6 +81,9 @@ const Navbar = () => {
               <span className="hidden sm:inline">Связаться</span>
               <span className="sm:hidden">WhatsApp</span>
             </a>
+
+            {/* ✅ Переключатель языка */}
+            <LanguageSwitcher />
           </div>
 
           {/* Бургер-меню */}
@@ -97,7 +101,7 @@ const Navbar = () => {
         </div>
 
         {/* Мобильное меню */}
-        <div className={`md:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? 'max-h-[400px] py-3 sm:py-4' : 'max-h-0'}`}>
+        <div className={`md:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? 'max-h-[450px] py-3 sm:py-4' : 'max-h-0'}`}>
           <div className="flex flex-col gap-2 sm:gap-3 border-t border-gray-100 pt-3 sm:pt-4">
             <NavLink
               to="/"
@@ -160,6 +164,10 @@ const Navbar = () => {
               >
                 💬 Связаться в WhatsApp
               </a>
+            </div>
+            {/* ✅ Переключатель языка в мобильном меню */}
+            <div className="px-4 pt-2">
+              <LanguageSwitcher />
             </div>
           </div>
         </div>
