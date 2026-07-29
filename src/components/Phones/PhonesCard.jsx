@@ -86,15 +86,13 @@ const PhonesCard = ({ phone }) => {
         </p>
 
         <Link to={`/phones/${id}`}>
-          <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-2 line-clamp-2 min-h-[56px] hover:text-orange-500 transition-colors">
+          <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-800 mb-2 line-clamp-2 min-h-[48px] sm:min-h-[56px] hover:text-orange-500 transition-colors">
             {name}
           </h3>
         </Link>
 
-       
-
-        <div className="flex items-center gap-3 mb-4">
-          <span className="text-2xl font-bold text-orange-500">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4">
+          <span className="text-xl sm:text-2xl font-bold text-orange-500">
             {formatPrice(price)} сом
           </span>
           {oldPrice && (
@@ -107,7 +105,7 @@ const PhonesCard = ({ phone }) => {
         <div className="flex flex-col sm:flex-row gap-2.5">
           <Link 
             to={`/phones/${id}`} 
-            className="flex-1 bg-gray-100 hover:bg-orange-50 hover:text-orange-600 text-gray-700 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:scale-[1.02] flex items-center justify-center gap-1.5 border border-gray-200/80 hover:border-orange-200"
+            className="w-full sm:flex-1 bg-gray-100 hover:bg-orange-50 hover:text-orange-600 text-gray-700 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:scale-[1.02] flex items-center justify-center gap-1.5 border border-gray-200/80 hover:border-orange-200"
           >
             <span>ℹ️</span>
             <span>{t('product.details')}</span>
@@ -118,7 +116,7 @@ const PhonesCard = ({ phone }) => {
               href={whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 hover:scale-[1.02] shadow-md shadow-orange-500/20 hover:shadow-lg hover:shadow-orange-500/30 flex items-center justify-center gap-1.5"
+              className="w-full sm:flex-1 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 hover:scale-[1.02] shadow-md shadow-orange-500/20 hover:shadow-lg hover:shadow-orange-500/30 flex items-center justify-center gap-1.5"
             >
               <span>💬</span>
               <span>{t('product.order')}</span>
@@ -126,7 +124,7 @@ const PhonesCard = ({ phone }) => {
           ) : (
             <button
               disabled
-              className="flex-1 bg-gray-100 text-gray-400 px-4 py-2.5 rounded-xl text-sm font-medium cursor-not-allowed border border-gray-200 flex items-center justify-center gap-1.5"
+              className="w-full sm:flex-1 bg-gray-100 text-gray-400 px-4 py-2.5 rounded-xl text-sm font-medium cursor-not-allowed border border-gray-200 flex items-center justify-center gap-1.5"
             >
               <span>🚫</span>
               <span>{t('product.outofstock')}</span>

@@ -54,7 +54,7 @@ const Search = ({ phones }) => {
   };
 
   return (
-    <div ref={searchRef} className="relative flex-1 max-w-2xl mx-4">
+    <div ref={searchRef} className="relative w-full max-w-2xl mx-0 sm:mx-4">
       <form onSubmit={handleSearch} className="relative">
         <input
           type="text"
@@ -64,11 +64,11 @@ const Search = ({ phones }) => {
             if (searchTerm.length > 0) setIsOpen(true);
           }}
           placeholder={t('search.placeholder')}
-          className="w-full px-4 py-2.5 pr-12 rounded-full border-2 border-gray-200 focus:border-orange-400 focus:outline-none transition-all duration-200 bg-white/90 backdrop-blur-sm text-sm"
+          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 pr-12 rounded-full border-2 border-gray-200 focus:border-orange-400 focus:outline-none transition-all duration-200 bg-white/90 backdrop-blur-sm text-sm sm:text-base"
         />
         <button
           type="submit"
-          className="absolute right-2 top-1/2 -translate-y-1/2 bg-orange-500 hover:bg-orange-600 text-white p-2 rounded-full transition-all duration-200 hover:scale-105"
+          className="absolute right-2 top-1/2 -translate-y-1/2 bg-orange-500 hover:bg-orange-600 text-white p-2 sm:p-2.5 rounded-full transition-all duration-200 hover:scale-105"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />

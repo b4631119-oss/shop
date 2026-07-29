@@ -44,7 +44,7 @@ const BottomNav = () => {
   ];
 
   return (
-    <div className="md:hidden fixed bottom-3 left-3 right-3 z-50 bg-white/95 backdrop-blur-xl border border-gray-100 shadow-2xl rounded-2xl px-2 py-2">
+    <div className="md:hidden fixed bottom-3 left-3 right-3 z-50 bg-white/95 backdrop-blur-xl border border-gray-100 shadow-2xl rounded-2xl px-2 py-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))]">
       <div className="flex justify-around items-center">
         {navItems.map((item) => (
           <NavLink

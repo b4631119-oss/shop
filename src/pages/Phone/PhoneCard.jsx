@@ -39,10 +39,10 @@ const PhoneCard = ({ phone }) => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-      <div className="grid md:grid-cols-2 gap-8 lg:gap-12 bg-white rounded-3xl shadow-xl overflow-hidden">
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 lg:py-12">
+      <div className="grid md:grid-cols-2 gap-5 sm:gap-8 lg:gap-12 bg-white rounded-3xl shadow-xl overflow-hidden">
         
-        <div className="relative bg-gradient-to-br from-orange-50 to-amber-50 p-8 md:p-12 flex items-center justify-center min-h-[300px] md:min-h-[400px]">
+        <div className="relative bg-gradient-to-br from-orange-50 to-amber-50 p-4 sm:p-8 md:p-12 flex items-center justify-center min-h-[260px] sm:min-h-[320px] md:min-h-[400px]">
           <img 
             src={image} 
             alt={name} 
@@ -60,7 +60,7 @@ const PhoneCard = ({ phone }) => {
           )}
         </div>
 
-        <div className="p-6 md:p-8 lg:p-10">
+        <div className="p-4 sm:p-6 md:p-8 lg:p-10">
           <div className="mb-2">
             <span className="text-orange-500 font-medium text-sm uppercase tracking-wider">
               {category === "Смартфоны" ? t('category.smartphones') : category === "Аксессуары" ? t('category.accessories') : category}
@@ -71,8 +71,8 @@ const PhoneCard = ({ phone }) => {
             {name}
           </h1>
 
-          <div className="flex items-center gap-4 mb-6">
-            <span className="text-3xl md:text-4xl font-bold text-orange-500">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-6">
+            <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-orange-500">
               {formatPrice(price)} сом
             </span>
             {oldPrice && (
@@ -92,7 +92,7 @@ const PhoneCard = ({ phone }) => {
                 href={whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white px-6 py-3.5 rounded-xl font-semibold transition-all duration-200 hover:scale-[1.02] shadow-lg shadow-orange-500/25 hover:shadow-xl hover:shadow-orange-500/35 flex items-center justify-center gap-2"
+                className="w-full sm:flex-1 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white px-6 py-3.5 rounded-xl font-semibold transition-all duration-200 hover:scale-[1.02] shadow-lg shadow-orange-500/25 hover:shadow-xl hover:shadow-orange-500/35 flex items-center justify-center gap-2"
               >
                 <span>💬</span>
                 <span>{t('detail.order_whatsapp')}</span>
@@ -100,7 +100,7 @@ const PhoneCard = ({ phone }) => {
             ) : (
               <button
                 disabled
-                className="flex-1 bg-gray-100 text-gray-400 px-6 py-3.5 rounded-xl font-medium cursor-not-allowed border border-gray-200 flex items-center justify-center gap-2"
+                className="w-full sm:flex-1 bg-gray-100 text-gray-400 px-6 py-3.5 rounded-xl font-medium cursor-not-allowed border border-gray-200 flex items-center justify-center gap-2"
               >
                 <span>🚫</span>
                 <span>{t('product.outofstock')}</span>
@@ -109,7 +109,7 @@ const PhoneCard = ({ phone }) => {
             
             <button
               onClick={handleAddToFavorites}
-              className="flex-1 bg-gray-100 hover:bg-orange-50 hover:text-orange-600 text-gray-700 px-6 py-3.5 rounded-xl font-semibold transition-all duration-200 hover:scale-[1.02] border border-gray-200 hover:border-orange-200 flex items-center justify-center gap-2"
+              className="w-full sm:flex-1 bg-gray-100 hover:bg-orange-50 hover:text-orange-600 text-gray-700 px-6 py-3.5 rounded-xl font-semibold transition-all duration-200 hover:scale-[1.02] border border-gray-200 hover:border-orange-200 flex items-center justify-center gap-2"
             >
               <span>❤️</span>
               <span>{t('detail.add_favorite')}</span>
