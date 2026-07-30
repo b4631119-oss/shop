@@ -1,14 +1,61 @@
 import { Link } from 'react-router-dom';
-import { 
-  Smartphone, 
-  MapPin, 
-  Clock, 
-  Phone, 
-  MessageCircle, 
-  Instagram, 
-  ChevronRight 
-} from 'lucide-react';
+import PropTypes from 'prop-types';
 import { useTranslation } from '../../hook/useTranslation';
+
+// SVG иконки с PropTypes
+const Smartphone = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+    <line x1="12" x2="12" y1="18" y2="18"/>
+  </svg>
+);
+Smartphone.propTypes = { className: PropTypes.string };
+
+const MapPin = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+    <circle cx="12" cy="10" r="3"/>
+  </svg>
+);
+MapPin.propTypes = { className: PropTypes.string };
+
+const Clock = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10"/>
+    <polyline points="12 6 12 12 16 14"/>
+  </svg>
+);
+Clock.propTypes = { className: PropTypes.string };
+
+const Phone = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+  </svg>
+);
+Phone.propTypes = { className: PropTypes.string };
+
+const MessageCircle = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+  </svg>
+);
+MessageCircle.propTypes = { className: PropTypes.string };
+
+const Instagram = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+  </svg>
+);
+Instagram.propTypes = { className: PropTypes.string };
+
+const ChevronRight = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <polyline points="9 18 15 12 9 6"/>
+  </svg>
+);
+ChevronRight.propTypes = { className: PropTypes.string };
 
 const GIS_LOCATION_URL = "https://2gis.kg/osh/geo/70030076156501927?m=72.789121%2C40.541648%2F20";
 
@@ -95,6 +142,7 @@ const Footer = () => {
             </ul>
           </div>
 
+          {/* Колонка 3: Контакты */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-orange-400 flex items-center gap-2">
               <span className="w-1.5 h-4 bg-orange-500 rounded-full"></span>
@@ -168,6 +216,7 @@ const Footer = () => {
         </div>
       </div>
 
+      {/* Нижняя часть */}
       <div className="border-t border-gray-800/60 bg-black/40 backdrop-blur-sm py-5 mb-16 md:mb-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-3 text-center sm:text-left text-xs sm:text-sm text-gray-400">
           <p>© 2026 Telephone Osh. {t('footer.rights')}.</p>
@@ -176,7 +225,8 @@ const Footer = () => {
           </p>
         </div>
       </div>
-      </footer>
-);
-}
+    </footer>
+  );
+};
+
 export default Footer;
