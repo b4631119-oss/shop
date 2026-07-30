@@ -158,7 +158,7 @@ const Footer = () => {
                   href="https://instagram.com/telfonchi_umar"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-pink-400 transition-colors font-medium text-pink-400"
+                  className="hover:text-pink-400 transition-colors font-medium text-pink-500"
                 >
                   Instagram
                 </a>
