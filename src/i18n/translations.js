@@ -328,7 +328,7 @@ export const languages = [
 
 // Функции для работы с языком
 export const getCurrentLanguage = () => {
-  return localStorage.getItem('language') || 'ru';
+  return localStorage.getItem('language') || 'uz_cyrl';
 };
 
 export const setLanguage = (lang) => {
