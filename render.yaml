@@ -1,0 +1,11 @@
+# render.yaml
+services:
+  - type: web
+    name: pocketbase-telephone-osh
+    runtime: image
+    repo: https://github.com/ваш-аккаунт/shop.git
+    plan: free
+    envVars:
+      - key: PORT
+        value: 8090
+    dockerCommand: ./pocketbase serve --http=0.0.0.0:8090

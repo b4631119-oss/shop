@@ -1,11 +1,10 @@
 // src/lib/pocketbase.js
 import PocketBase from 'pocketbase';
 
-const PB_URL = 'http://127.0.0.1:8090';
+// 🔥 Используем твой URL с pockethost.io
+const PB_URL = import.meta.env.VITE_PB_URL || 'https://telefon-osh.pockethost.io';
 
 export const pb = new PocketBase(PB_URL);
-
-// Отключаем автоотмену
 pb.autoCancellation(false);
 
 export const getProducts = async () => {
@@ -31,22 +30,8 @@ export const getProduct = async (id) => {
   }
 };
 
-// ✅ ИСПРАВЛЕННАЯ ФУНКЦИЯ ДЛЯ КАРТИНОК
 export const getImageUrl = (product, filename) => {
-  if (!product || !filename) {
-    console.log('❌ Нет продукта или файла');
-    return '';
-  }
-  
-  // Получаем collectionId или collectionName
-  const collectionId = product.collectionId || product.collectionName;
-  
-  if (!collectionId) {
-    console.log('❌ Нет collectionId');
-    return '';
-  }
-  
-  const url = pb.files.getURL(product, filename);
-  console.log('🖼️ URL картинки:', url);
-  return url;
+  if (!product || !filename) return '';
+  // Используем PB_URL для корректного URL
+  return `${PB_URL}/api/files/${product.collectionId || product.collectionName}/${product.id}/${filename}`;
 };
