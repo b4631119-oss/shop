@@ -95,7 +95,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Колонка 3: Контакты с интерактивной ссылкой 2GIS */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-orange-400 flex items-center gap-2">
               <span className="w-1.5 h-4 bg-orange-500 rounded-full"></span>
@@ -169,7 +168,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Нижняя часть футера */}
       <div className="border-t border-gray-800/60 bg-black/40 backdrop-blur-sm py-5 mb-16 md:mb-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-3 text-center sm:text-left text-xs sm:text-sm text-gray-400">
           <p>© 2026 Telephone Osh. {t('footer.rights')}.</p>
@@ -178,8 +176,7 @@ const Footer = () => {
           </p>
         </div>
       </div>
-    </footer>
-  );
-};
-
+      </footer>
+);
+}
 export default Footer;
