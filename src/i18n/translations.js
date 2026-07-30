@@ -22,6 +22,8 @@ export const translations = {
     'banner.stats.products': 'Товаров',
     'banner.stats.original': 'Оригинал',
     'banner.stats.reviews': 'Отзывы',
+    'banner.titanium': 'Оранжевый титан',
+    'whatsapp.msg': 'Здравствуйте! Хочу купить: {name} за {price} сом',
     
     // Карточка товара
     'product.outofstock': 'Нет в наличии',
@@ -101,6 +103,8 @@ export const translations = {
     'banner.stats.products': 'Mahsulotlar',
     'banner.stats.original': 'Original',
     'banner.stats.reviews': 'Sharhlar',
+    'banner.titanium': 'Zargaldoq titan',
+    'whatsapp.msg': 'Assalomu alaykum! Sotib olmoqchiman: {name} {price} somga',
     
     // Карточка товара
     'product.outofstock': 'Mavjud emas',
@@ -180,6 +184,8 @@ export const translations = {
     'banner.stats.products': 'Маҳсулотлар',
     'banner.stats.original': 'Оригинал',
     'banner.stats.reviews': 'Шарҳлар',
+    'banner.titanium': 'Заргалдоқ титан',
+    'whatsapp.msg': 'Ассалому алайкум! Сотиб олмоқчиман: {name} {price} сомга',
     
     // Карточка товара
     'product.outofstock': 'Мавжуд эмас',
@@ -259,6 +265,8 @@ export const translations = {
     'banner.stats.products': 'Товарлар',
     'banner.stats.original': 'Оригинал',
     'banner.stats.reviews': 'Пикирлер',
+    'banner.titanium': 'Апельсин титан',
+    'whatsapp.msg': 'Саламатсызбы! Сатып алайын дедим эле: {name} {price} сомго',
     
     // Карточка товара
     'product.outofstock': 'Жок',

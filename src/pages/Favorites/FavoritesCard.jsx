@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useTranslation } from '../../hook/useTranslation';
-import { getImageUrl } from '../../lib/pocketbase';
+import { getImageUrl } from '../../lib/api';
 
 const FavoritesCard = ({ phone, onRemove }) => {
   const { t } = useTranslation();
   const { id, name, category, price, oldPrice, inStock, images } = phone || {};
   const [imageUrl, setImageUrl] = useState('');
 
-  // Получаем URL первого фото из PocketBase
+  // Получаем URL первого фото
   useEffect(() => {
     if (phone && images && images.length > 0) {
       const url = getImageUrl(phone, images[0]);
@@ -29,7 +29,10 @@ const FavoritesCard = ({ phone, onRemove }) => {
     }
   };
 
-  const whatsappLink = `https://wa.me/996551383739?text=Здравствуйте!%20Хочу%20купить:%20${name}%20за%20${formatPrice(price)}%20сом`;
+  const whatsappMessage = t('whatsapp.msg')
+    .replace('{name}', name || '')
+    .replace('{price}', formatPrice(price));
+  const whatsappLink = `https://wa.me/996551383739?text=${encodeURIComponent(whatsappMessage)}`;
 
   if (!phone || !name) {
     return null;

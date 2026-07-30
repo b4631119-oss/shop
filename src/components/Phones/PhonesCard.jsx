@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import swal from "sweetalert";
 import { useTranslation } from '../../hook/useTranslation';
-import { getImageUrl } from '../../lib/pocketbase';
+import { getImageUrl } from '../../lib/api';
 
 const PhonesCard = ({ phone }) => {
   const { t } = useTranslation();
@@ -29,7 +29,10 @@ const PhonesCard = ({ phone }) => {
     return new Intl.NumberFormat('ru-RU').format(price);
   };
 
-  const whatsappLink = `https://wa.me/996551383739?text=Здравствуйте!%20Хочу%20купить:%20${name}%20за%20${formatPrice(price)}%20сом`;
+  const whatsappMessage = t('whatsapp.msg')
+    .replace('{name}', name || '')
+    .replace('{price}', formatPrice(price));
+  const whatsappLink = `https://wa.me/996551383739?text=${encodeURIComponent(whatsappMessage)}`;
 
   const handleToggleFavorite = (e) => {
     e.preventDefault();

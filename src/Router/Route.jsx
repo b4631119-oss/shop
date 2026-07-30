@@ -5,6 +5,8 @@ import Home from "../pages/Home/Home";
 import Favorites from "../pages/Favorites/Favorites";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Phone from "../pages/Phone/Phone";
+import Phones from "../pages/Phones/Phones";
+import Accessories from "../pages/Accessories/Accessories";
 
 const myCreatedRoute = createBrowserRouter([
   {
@@ -15,6 +17,14 @@ const myCreatedRoute = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/phones",
+        element: <Phones />,
+      },
+      {
+        path: "/accessories",
+        element: <Accessories />,
       },
       {
         path: "/favorites",

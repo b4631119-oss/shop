@@ -1,6 +1,5 @@
-// src/pages/Favorites/Favorites.jsx
 import FavoritesCard from "./FavoritesCard"
-import  { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "../../hook/useTranslation";
 
@@ -9,19 +8,30 @@ const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  useEffect(() => {
+  const loadFavorites = useCallback(() => {
     try {
       const favoriteItems = JSON.parse(localStorage.getItem("favorites")) || [];
-      if (Array.isArray(favoriteItems) && favoriteItems.length > 0) {
+      if (Array.isArray(favoriteItems)) {
         setFavorites(favoriteItems);
         const total = favoriteItems.reduce((prev, current) => prev + (current.price || 0), 0);
         setTotalPrice(total);
       }
     } catch (e) {
-      console.error("Error reading favorites from localStorage", e);
       setFavorites([]);
+      setTotalPrice(0);
     }
   }, []);
+
+  useEffect(() => {
+    loadFavorites();
+    const handleStorageChange = (e) => {
+      if (e.key === "favorites") {
+        loadFavorites();
+      }
+    };
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, [loadFavorites]);
 
   const handleRemoveAll = () => {
     localStorage.removeItem("favorites");
@@ -34,7 +44,7 @@ const Favorites = () => {
     setFavorites(updatedFavorites);
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
     
-    const total = updatedFavorites.reduce((prev, current) => prev + current.price, 0);
+    const total = updatedFavorites.reduce((prev, current) => prev + (current.price || 0), 0);
     setTotalPrice(total);
   };
 

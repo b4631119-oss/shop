@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useTranslation } from "../../../hook/useTranslation";
 
 const Banner = () => {
@@ -26,12 +27,12 @@ const Banner = () => {
             </p>
             
             <div className="flex flex-wrap gap-3 md:gap-4">
-              <a
-                href="/phones"
+              <Link
+                to="/phones"
                 className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-6 md:px-8 py-2.5 md:py-3 rounded-full text-sm md:text-base font-medium transition-all duration-200 hover:scale-105 hover:shadow-lg shadow-orange-200"
               >
                 {t('banner.btn.catalog')}
-              </a>
+              </Link>
               <a
                 href="https://wa.me/996551383739"
                 target="_blank"
@@ -57,6 +58,7 @@ const Banner = () => {
               </div>
             </div>
           </div>
+
           <div className="flex justify-center items-center order-1 md:order-2">
             <div className="relative w-full max-w-[280px] sm:max-w-[320px] md:max-w-full">
               <div className="absolute -top-10 -left-10 w-60 h-60 sm:w-80 sm:h-80 bg-orange-300 rounded-full opacity-20 animate-pulse"></div>
@@ -65,11 +67,11 @@ const Banner = () => {
               <div className="relative bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 transform hover:scale-105 transition-transform duration-500 shadow-orange-300/50">
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6">
                   <div className="text-6xl sm:text-7xl md:text-8xl text-center mb-2 filter drop-shadow-lg">
-                    <img src="/iphone.jpeg" alt="" />
+                    <img src="/iphone.jpeg" alt="iPhone 17 Pro" className="w-full h-auto object-cover rounded-xl" />
                   </div>
                   <div className="bg-orange-500/30 backdrop-blur-sm rounded-lg sm:rounded-xl p-2 sm:p-3 text-center">
                     <p className="text-white font-bold text-base sm:text-lg">iPhone 17 Pro</p>
-                    <p className="text-orange-100 text-xs sm:text-sm">Оранжевый титан</p>
+                    <p className="text-orange-100 text-xs sm:text-sm">{t('banner.titanium')}</p>
                     <div className="flex justify-center gap-1 mt-2">
                       <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full"></span>
                       <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white/50 rounded-full"></span>

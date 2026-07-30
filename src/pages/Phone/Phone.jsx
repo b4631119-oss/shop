@@ -1,7 +1,7 @@
 // src/pages/Phone/Phone.jsx
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getProduct } from '../../lib/pocketbase';
+import { useParams, Link } from 'react-router-dom';
+import { getProduct } from '../../lib/api';
 import PhoneCard from './PhoneCard';
 
 const Phone = () => {
@@ -11,25 +11,30 @@ const Phone = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    let isMounted = true;
     if (!id) return;
-
-    console.log('🔍 Загружаем товар с ID:', id);
 
     getProduct(id)
       .then(data => {
-        if (data) {
-          console.log('✅ Товар загружен:', data);
-          setPhone(data);
-        } else {
-          setError('Товар не найден');
+        if (isMounted) {
+          if (data) {
+            setPhone(data);
+          } else {
+            setError('Товар не найден');
+          }
+          setLoading(false);
         }
-        setLoading(false);
       })
       .catch(err => {
-        console.error('❌ Ошибка:', err);
-        setError(err.message);
-        setLoading(false);
+        if (isMounted) {
+          setError(err.message);
+          setLoading(false);
+        }
       });
+
+    return () => {
+      isMounted = false;
+    };
   }, [id]);
 
   if (loading) {

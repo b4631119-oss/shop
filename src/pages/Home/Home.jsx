@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import Banner from '../../components/Header/Banner/Banner';
 import Phones from '../../components/Phones/Phones';
-import { getProducts } from '../../lib/pocketbase';
+import { getProducts } from '../../lib/api';
 
 const Home = () => {
   const [phones, setPhones] = useState([]);
@@ -12,7 +12,6 @@ const Home = () => {
   useEffect(() => {
     let isMounted = true; // ← Предотвращаем обновление после размонтирования
 
-    console.log('🔄 Загружаем товары из PocketBase...');
     
     getProducts()
       .then(data => {

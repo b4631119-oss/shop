@@ -2,15 +2,15 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { useTranslation } from "../../hook/useTranslation";
+import { getImageUrl } from "../../lib/api";
 
-const Search = ({ phones }) => {
+const Search = ({ phones = [] }) => {
   const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const searchRef = useRef(null);
 
-  // Закрываем поиск при клике вне
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -21,9 +21,8 @@ const Search = ({ phones }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Поиск с учетом всех полей
   useEffect(() => {
-    if (searchTerm.length > 0) {
+    if (searchTerm.length > 0 && Array.isArray(phones)) {
       const term = searchTerm.toLowerCase().trim();
       const filtered = phones.filter(phone => {
         const nameMatch = phone.name?.toLowerCase().includes(term) || false;
@@ -33,7 +32,7 @@ const Search = ({ phones }) => {
         
         return nameMatch || categoryMatch || priceMatch || descriptionMatch;
       });
-      setResults(filtered.slice(0, 8)); // Показываем максимум 8 результатов
+      setResults(filtered.slice(0, 8));
       setIsOpen(true);
     } else {
       setResults([]);
@@ -47,10 +46,6 @@ const Search = ({ phones }) => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if (searchTerm.trim().length > 0) {
-      // Можно перейти на страницу с результатами
-      // window.location.href = `/search?q=${searchTerm}`;
-    }
   };
 
   return (
@@ -76,7 +71,6 @@ const Search = ({ phones }) => {
         </button>
       </form>
 
-      {/* Результаты поиска */}
       {isOpen && results.length > 0 && (
         <div className="absolute top-full mt-2 left-0 right-0 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-50 max-h-[400px] overflow-y-auto">
           {results.map((phone) => (
@@ -90,9 +84,12 @@ const Search = ({ phones }) => {
               className="flex items-center gap-3 p-3 hover:bg-orange-50 transition-all duration-200 border-b border-gray-50 last:border-0"
             >
               <img 
-                src={phone.image} 
+                src={getImageUrl(phone, phone.images?.[0]) || 'https://placehold.co/400x400/e2e8f0/94a3b8?text=Нет+фото'} 
                 alt={phone.name} 
                 className="w-12 h-12 object-contain rounded-lg bg-gray-50 p-1"
+                onError={(e) => {
+                  e.target.src = 'https://placehold.co/400x400/e2e8f0/94a3b8?text=Нет+фото';
+                }}
               />
               <div className="flex-1 min-w-0">
                 <h4 className="text-sm font-medium text-gray-800 truncate">
@@ -118,7 +115,6 @@ const Search = ({ phones }) => {
         </div>
       )}
 
-      {/* Нет результатов */}
       {isOpen && searchTerm.length > 0 && results.length === 0 && (
         <div className="absolute top-full mt-2 left-0 right-0 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-50 p-6 text-center">
           <div className="text-4xl mb-2">🔍</div>
@@ -131,7 +127,7 @@ const Search = ({ phones }) => {
 };
 
 Search.propTypes = {
-  phones: PropTypes.array.isRequired,
+  phones: PropTypes.array,
 };
 
 export default Search;

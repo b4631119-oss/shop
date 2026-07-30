@@ -1,17 +1,12 @@
-// src/components/Phones/Phones.jsx
 import PropTypes from 'prop-types';
 import PhonesCard from './PhonesCard';
 
 const Phones = ({ phones }) => {
-  console.log('📱 Phones компонент получил:', phones);
-  console.log('📦 Количество в Phones:', phones?.length);
-
   if (!phones || phones.length === 0) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-10">
         <h2 className="text-2xl text-center text-gray-500">📭 Товаров пока нет</h2>
-        <p className="text-center text-gray-400 text-sm mt-2">Добавьте товары через  PocketBase</p>
-        <p className="text-center text-gray-400 text-xs mt-4">....</p>
+        <p className="text-center text-gray-400 text-sm mt-2">Товары скоро появятся</p>
       </div>
     );
   }

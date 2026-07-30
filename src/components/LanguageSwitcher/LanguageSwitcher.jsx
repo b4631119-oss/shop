@@ -1,4 +1,3 @@
-// src/components/LanguageSwitcher/LanguageSwitcher.jsx
 import { useState, useEffect, useRef } from 'react';
 import { languages, getCurrentLanguage, setLanguage } from '../../i18n/translations';
 
@@ -7,7 +6,6 @@ const LanguageSwitcher = () => {
   const [currentLang, setCurrentLang] = useState(getCurrentLanguage());
   const dropdownRef = useRef(null);
 
-  // Закрываем при клике вне
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -24,8 +22,7 @@ const LanguageSwitcher = () => {
     setCurrentLang(langCode);
     setLanguage(langCode);
     setIsOpen(false);
-    // Обновляем страницу для применения перевода
-    window.location.reload();
+    window.dispatchEvent(new Event('languageChange'));
   };
 
   return (
