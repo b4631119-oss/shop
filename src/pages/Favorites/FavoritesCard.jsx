@@ -1,11 +1,23 @@
 // src/components/FavoritesCard/FavoritesCard.jsx
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { useTranslation } from '../../hook/useTranslation';
+import { getImageUrl } from '../../lib/pocketbase';
 
 const FavoritesCard = ({ phone, onRemove }) => {
   const { t } = useTranslation();
-  const { id, name, category, price, oldPrice, inStock, image } = phone || {};
+  const { id, name, category, price, oldPrice, inStock, images } = phone || {};
+  const [imageUrl, setImageUrl] = useState('');
+
+  // Получаем URL первого фото из PocketBase
+  useEffect(() => {
+    if (phone && images && images.length > 0) {
+      const url = getImageUrl(phone, images[0]);
+      setImageUrl(url);
+      console.log('🖼️ FavoritesCard URL:', url);
+    }
+  }, [phone, images]);
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('ru-RU').format(price);
@@ -28,9 +40,12 @@ const FavoritesCard = ({ phone, onRemove }) => {
       <div className="relative h-48 sm:h-56 overflow-hidden bg-gray-100">
         <Link to={`/phones/${id}`}>
           <img 
-            src={image} 
+            src={imageUrl || 'https://placehold.co/400x400/e2e8f0/94a3b8?text=Нет+фото'} 
             alt={name} 
             className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500"
+            onError={(e) => {
+              e.target.src = 'https://placehold.co/400x400/e2e8f0/94a3b8?text=Нет+фото';
+            }}
           />
         </Link>
         
@@ -114,8 +129,8 @@ FavoritesCard.propTypes = {
     category: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     oldPrice: PropTypes.number,
-    inStock: PropTypes.bool.isRequired,
-    image: PropTypes.string.isRequired,
+    inStock: PropTypes.bool,
+    images: PropTypes.array,
   }).isRequired,
   onRemove: PropTypes.func.isRequired,
 };

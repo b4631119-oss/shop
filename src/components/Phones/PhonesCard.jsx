@@ -4,16 +4,25 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import swal from "sweetalert";
 import { useTranslation } from '../../hook/useTranslation';
+import { getImageUrl } from '../../lib/pocketbase';
 
 const PhonesCard = ({ phone }) => {
   const { t } = useTranslation();
-  const { id, name, category, price, oldPrice, inStock, image,  } = phone || {};
+  const { id, name, category, price, oldPrice, inStock, images } = phone || {};
   const [isFavorite, setIsFavorite] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const imageList = images || [];
 
+  // Проверяем избранное
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
     const exists = favorites.some(item => item.id === id);
     setIsFavorite(exists);
+  }, [id]);
+
+  // Сбрасываем индекс при смене товара
+  useEffect(() => {
+    setCurrentImageIndex(0);
   }, [id]);
 
   const formatPrice = (price) => {
@@ -42,15 +51,35 @@ const PhonesCard = ({ phone }) => {
     }
   };
 
+  const handlePrevImage = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentImageIndex((prev) => (prev === 0 ? imageList.length - 1 : prev - 1));
+  };
+
+  const handleNextImage = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentImageIndex((prev) => (prev === imageList.length - 1 ? 0 : prev + 1));
+  };
+
+  const handleDotClick = (e, index) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentImageIndex(index);
+  };
+
+  const isInStock = inStock !== false;
+
   return (
     <div className="group relative bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden">
-      {!inStock && (
+      {!isInStock && (
         <div className="absolute top-4 right-4 z-10 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
           {t('product.outofstock')}
         </div>
       )}
       
-      {oldPrice && inStock && (
+      {oldPrice && isInStock && (
         <div className="absolute top-4 left-4 z-10 bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold animate-pulse">
           -{Math.round(((oldPrice - price) / oldPrice) * 100)}%
         </div>
@@ -72,11 +101,60 @@ const PhonesCard = ({ phone }) => {
 
       <Link to={`/phones/${id}`}>
         <div className="relative h-64 md:h-72 overflow-hidden bg-gray-100">
-          <img 
-            src={image} 
-            alt={name} 
-            className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500"
-          />
+          {imageList.length > 0 ? (
+            <div className="relative w-full h-full">
+              <img 
+                src={getImageUrl(phone, imageList[currentImageIndex])} 
+                alt={name} 
+                className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500"
+                onError={(e) => {
+                  e.target.src = 'https://placehold.co/400x400/e2e8f0/94a3b8?text=Нет+фото';
+                }}
+              />
+              
+              {imageList.length > 1 && (
+                <>
+                  {/* Кнопка "Назад" */}
+                  <button
+                    onClick={handlePrevImage}
+                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white w-7 h-7 rounded-full flex items-center justify-center transition-all text-sm hover:scale-110"
+                  >
+                    ◀
+                  </button>
+                  
+                  {/* Кнопка "Вперед" */}
+                  <button
+                    onClick={handleNextImage}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white w-7 h-7 rounded-full flex items-center justify-center transition-all text-sm hover:scale-110"
+                  >
+                    ▶
+                  </button>
+                  
+                  {/* Индикаторы */}
+                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                    {imageList.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={(e) => handleDotClick(e, idx)}
+                        className={`w-2 h-2 rounded-full transition-all ${
+                          idx === currentImageIndex 
+                            ? 'bg-white scale-125' 
+                            : 'bg-white/50 hover:bg-white/70'
+                        }`}
+                        aria-label={`Фото ${idx + 1}`}
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          ) : (
+            <img 
+              src="https://placehold.co/400x400/e2e8f0/94a3b8?text=Нет+фото" 
+              alt={name} 
+              className="w-full h-full object-contain p-4"
+            />
+          )}
         </div>
       </Link>
 
@@ -111,7 +189,7 @@ const PhonesCard = ({ phone }) => {
             <span>{t('product.details')}</span>
           </Link>
 
-          {inStock ? (
+          {isInStock ? (
             <a
               href={whatsappLink}
               target="_blank"
@@ -143,8 +221,9 @@ PhonesCard.propTypes = {
     category: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     oldPrice: PropTypes.number,
-    inStock: PropTypes.bool.isRequired,
-    image: PropTypes.string.isRequired,
+    inStock: PropTypes.bool,
+    images: PropTypes.array,
+    description: PropTypes.string,
     rating: PropTypes.number,
   }).isRequired,
 };
