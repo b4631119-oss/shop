@@ -1,17 +1,39 @@
 // src/components/PhonesCard/PhonesCard.jsx
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import swal from "sweetalert";
 import { useTranslation } from '../../hook/useTranslation';
-import { getImageUrl } from '../../lib/api';
 
 const PhonesCard = ({ phone }) => {
   const { t } = useTranslation();
   const { id, name, category, price, oldPrice, inStock, images } = phone || {};
   const [isFavorite, setIsFavorite] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const imageList = images || [];
+  
+  // Свайп
+  const [touchStartX, setTouchStartX] = useState(0);
+  const [touchEndX, setTouchEndX] = useState(0);
+  const imageRef = useRef(null);
+  
+  // ✅ Правильно собираем все URL фото
+  const imageList = (() => {
+    if (!images || !Array.isArray(images) || images.length === 0) {
+      return [];
+    }
+    
+    return images
+      .map(img => {
+        if (typeof img === 'object') {
+          return img.image_url || img.image || null;
+        }
+        if (typeof img === 'string') {
+          return img;
+        }
+        return null;
+      })
+      .filter(Boolean);
+  })();
 
   // Проверяем избранное
   useEffect(() => {
@@ -54,6 +76,7 @@ const PhonesCard = ({ phone }) => {
     }
   };
 
+  // Навигация
   const handlePrevImage = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -70,6 +93,31 @@ const PhonesCard = ({ phone }) => {
     e.preventDefault();
     e.stopPropagation();
     setCurrentImageIndex(index);
+  };
+
+  // ✅ СВАЙП
+  const handleTouchStart = (e) => {
+    setTouchStartX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEndX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (imageList.length <= 1) return;
+    
+    const diff = touchStartX - touchEndX;
+    const threshold = 50;
+    
+    if (diff > threshold) {
+      handleNextImage(new Event('click'));
+    } else if (diff < -threshold) {
+      handlePrevImage(new Event('click'));
+    }
+    
+    setTouchStartX(0);
+    setTouchEndX(0);
   };
 
   const isInStock = inStock !== false;
@@ -103,13 +151,19 @@ const PhonesCard = ({ phone }) => {
       </button>
 
       <Link to={`/phones/${id}`}>
-        <div className="relative h-64 md:h-72 overflow-hidden bg-gray-100">
+        <div 
+          className="relative h-64 md:h-72 overflow-hidden bg-gray-100"
+          ref={imageRef}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           {imageList.length > 0 ? (
             <div className="relative w-full h-full">
               <img 
-                src={getImageUrl(phone, imageList[currentImageIndex])} 
+                src={imageList[currentImageIndex] || 'https://placehold.co/400x400/e2e8f0/94a3b8?text=Нет+фото'} 
                 alt={name} 
-                className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500"
+                className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500 pointer-events-none"
                 onError={(e) => {
                   e.target.src = 'https://placehold.co/400x400/e2e8f0/94a3b8?text=Нет+фото';
                 }}
@@ -117,7 +171,7 @@ const PhonesCard = ({ phone }) => {
               
               {imageList.length > 1 && (
                 <>
-                  {/* Кнопка "Назад" */}
+                  {/* Кнопки навигации */}
                   <button
                     onClick={handlePrevImage}
                     className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white w-7 h-7 rounded-full flex items-center justify-center transition-all text-sm hover:scale-110"
@@ -125,7 +179,6 @@ const PhonesCard = ({ phone }) => {
                     ◀
                   </button>
                   
-                  {/* Кнопка "Вперед" */}
                   <button
                     onClick={handleNextImage}
                     className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white w-7 h-7 rounded-full flex items-center justify-center transition-all text-sm hover:scale-110"

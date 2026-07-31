@@ -1,24 +1,38 @@
 // src/pages/Phone/PhoneCard.jsx
 import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import swal from "sweetalert";
 import { Link } from "react-router-dom";
 import { useTranslation } from '../../hook/useTranslation';
-import { getImageUrl } from '../../lib/api';
 
 const PhoneCard = ({ phone }) => {
   const { t } = useTranslation();
   const { id, name, category, price, oldPrice, inStock, description, images } = phone || {};
-  const [imageUrl, setImageUrl] = useState('');
-
-  // Получаем URL картинки
-  useEffect(() => {
-    if (phone && images && images.length > 0) {
-      const url = getImageUrl(phone, images[0]);
-      setImageUrl(url);
-      console.log('🖼️ URL картинки (детально):', url);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  // Свайп
+  const [touchStartX, setTouchStartX] = useState(0);
+  const [touchEndX, setTouchEndX] = useState(0);
+  const imageRef = useRef(null);
+  
+  // ✅ Правильно собираем все URL фото
+  const imageList = (() => {
+    if (!images || !Array.isArray(images) || images.length === 0) {
+      return [];
     }
-  }, [phone, images]);
+    
+    return images
+      .map(img => {
+        if (typeof img === 'object') {
+          return img.image_url || img.image || null;
+        }
+        if (typeof img === 'string') {
+          return img;
+        }
+        return null;
+      })
+      .filter(Boolean);
+  })();
 
   const handleAddToFavorites = () => {
     const favoriteItems = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -42,6 +56,47 @@ const PhoneCard = ({ phone }) => {
     .replace('{price}', formatPrice(price));
   const whatsappLink = `https://wa.me/996551383739?text=${encodeURIComponent(whatsappMessage)}`;
 
+  // Навигация
+  const handlePrevImage = () => {
+    setCurrentImageIndex((prev) => (prev === 0 ? imageList.length - 1 : prev - 1));
+  };
+
+  const handleNextImage = () => {
+    setCurrentImageIndex((prev) => (prev === imageList.length - 1 ? 0 : prev + 1));
+  };
+
+  const handleDotClick = (index) => {
+    setCurrentImageIndex(index);
+  };
+
+  // ✅ СВАЙП
+  const handleTouchStart = (e) => {
+    setTouchStartX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEndX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (imageList.length <= 1) return;
+    
+    const diff = touchStartX - touchEndX;
+    const threshold = 50; // Минимальное расстояние для свайпа
+    
+    if (diff > threshold) {
+      // Свайп влево → следующее фото
+      handleNextImage();
+    } else if (diff < -threshold) {
+      // Свайп вправо → предыдущее фото
+      handlePrevImage();
+    }
+    
+    // Сбрасываем значения
+    setTouchStartX(0);
+    setTouchEndX(0);
+  };
+
   if (!phone || !name) {
     return (
       <div className="flex justify-center items-center h-[60vh]">
@@ -57,16 +112,74 @@ const PhoneCard = ({ phone }) => {
     <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 lg:py-12">
       <div className="grid md:grid-cols-2 gap-5 sm:gap-8 lg:gap-12 bg-white rounded-3xl shadow-xl overflow-hidden">
         
-        {/* Левая часть — фото */}
+        {/* Левая часть — фото с каруселью и свайпом */}
         <div className="relative bg-gradient-to-br from-orange-50 to-amber-50 p-4 sm:p-8 md:p-12 flex items-center justify-center min-h-[260px] sm:min-h-[320px] md:min-h-[400px]">
-          <img 
-            src={imageUrl || 'https://placehold.co/600x600/e2e8f0/94a3b8?text=Нет+фото'} 
-            alt={name} 
-            className="w-full max-w-md h-auto object-contain transform hover:scale-105 transition-transform duration-500"
-            onError={(e) => {
-              e.target.src = 'https://placehold.co/600x600/e2e8f0/94a3b8?text=Нет+фото';
-            }}
-          />
+          {imageList.length > 0 ? (
+            <div 
+              className="relative w-full max-w-md select-none"
+              ref={imageRef}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
+              <img 
+                src={imageList[currentImageIndex] || 'https://placehold.co/600x600/e2e8f0/94a3b8?text=Нет+фото'} 
+                alt={name} 
+                className="w-full h-auto object-contain transform hover:scale-105 transition-transform duration-500 pointer-events-none"
+                onError={(e) => {
+                  e.target.src = 'https://placehold.co/600x600/e2e8f0/94a3b8?text=Нет+фото';
+                }}
+              />
+              
+              {/* Кнопки навигации (десктоп) */}
+              {imageList.length > 1 && (
+                <>
+                  <button
+                    onClick={handlePrevImage}
+                    className="hidden sm:flex absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white w-8 h-8 rounded-full items-center justify-center text-sm hover:scale-110 transition-all"
+                  >
+                    ◀
+                  </button>
+                  <button
+                    onClick={handleNextImage}
+                    className="hidden sm:flex absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white w-8 h-8 rounded-full items-center justify-center text-sm hover:scale-110 transition-all"
+                  >
+                    ▶
+                  </button>
+                  
+                  {/* Индикаторы */}
+                  <div className="flex justify-center gap-2 mt-4">
+                    {imageList.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => handleDotClick(idx)}
+                        className={`w-2.5 h-2.5 rounded-full transition-all ${
+                          idx === currentImageIndex ? 'bg-orange-500 w-6' : 'bg-gray-300'
+                        }`}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Счетчик фото */}
+                  <div className="absolute bottom-4 right-4 bg-black/60 text-white text-xs px-3 py-1 rounded-full">
+                    {currentImageIndex + 1} / {imageList.length}
+                  </div>
+
+                  {/* Подсказка о свайпе (только мобилки) */}
+                  <div className="sm:hidden absolute bottom-16 left-1/2 -translate-x-1/2 text-xs text-gray-400 bg-white/80 px-3 py-1 rounded-full">
+                    👆 Свайпай для смены фото
+                  </div>
+                </>
+              )}
+            </div>
+          ) : (
+            <img 
+              src="https://placehold.co/600x600/e2e8f0/94a3b8?text=Нет+фото" 
+              alt={name} 
+              className="w-full max-w-md h-auto object-contain"
+            />
+          )}
+          
           {!inStock && (
             <div className="absolute top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
               {t('product.outofstock') || 'Нет в наличии'}
@@ -153,7 +266,6 @@ PhoneCard.propTypes = {
     price: PropTypes.number,
     oldPrice: PropTypes.number,
     inStock: PropTypes.bool,
-    image: PropTypes.string,
     images: PropTypes.array,
     description: PropTypes.string,
     rating: PropTypes.number,
