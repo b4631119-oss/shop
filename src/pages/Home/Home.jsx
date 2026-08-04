@@ -10,7 +10,7 @@ const Home = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    let isMounted = true; // ← Предотвращаем обновление после размонтирования
+    let isMounted = true; 
 
     
     getProducts()

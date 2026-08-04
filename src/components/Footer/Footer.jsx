@@ -63,7 +63,7 @@ const Footer = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className="bg-gradient-to-b from-gray-900 via-gray-900 to-black text-white mt-auto border-t border-gray-800/80 relative overflow-hidden">
+    <footer className="bg-gradient-to-b from-gray-900 via-gray-900 to-black text-white mt-auto border-t border-gray-800/80 relative overflow-hidden pb-16 md:pb-0">
       {/* Декоративное свечение на фоне */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2"></div>
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none translate-y-1/2"></div>
@@ -217,7 +217,7 @@ const Footer = () => {
       </div>
 
       {/* Нижняя часть */}
-      <div className="border-t border-gray-800/60 bg-black/40 backdrop-blur-sm py-5 mb-16 md:mb-0">
+      <div className="border-t border-gray-800/60 bg-black/40 backdrop-blur-sm py-4 sm:py-5 mb-12 sm:mb-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-3 text-center sm:text-left text-xs sm:text-sm text-gray-400">
           <p>© 2026 Telephone Osh. {t('footer.rights')}.</p>
           <p className="text-gray-500 flex items-center gap-1">

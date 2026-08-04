@@ -7,6 +7,7 @@ import BottomNav from "../components/Navigation/BottomNav";
 
 const MainLayout = () => {
   const location = useLocation();
+  const isProductDetailPage = /^\/phones\/[^/]+$/.test(location.pathname);
 
   useEffect(() => {
     const pageNames = {
@@ -18,6 +19,7 @@ const MainLayout = () => {
 
     const pageName = pageNames[location.pathname] || 'Telephone Osh';
     document.title = `Telephone Osh - ${pageName}`;
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
   }, [location.pathname]);
 
   return (
@@ -26,12 +28,14 @@ const MainLayout = () => {
       <main className="flex-1 pb-24 sm:pb-0">
         <Outlet />
       </main>
-      <Footer />
+      {!isProductDetailPage && <Footer />}
       
       {/* Нижняя навигация для мобилок (если нужна) */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50">
-        <BottomNav />
-      </div>
+      {!isProductDetailPage && (
+        <div className="md:hidden fixed bottom-0 left-0 right-0 z-50">
+          <BottomNav />
+        </div>
+      )}
     </div>
   );
 };

@@ -109,7 +109,7 @@ const PhoneCard = ({ phone }) => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 lg:py-12">
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 lg:py-12 pb-24 sm:pb-12">
       <div className="grid md:grid-cols-2 gap-5 sm:gap-8 lg:gap-12 bg-white rounded-3xl shadow-xl overflow-hidden">
         
         {/* Левая часть — фото с каруселью и свайпом */}
@@ -193,7 +193,7 @@ const PhoneCard = ({ phone }) => {
         </div>
 
         {/* Правая часть — информация */}
-        <div className="p-4 sm:p-6 md:p-8 lg:p-10">
+        <div className="p-4 sm:p-6 md:p-8 lg:p-10 pb-8 sm:pb-10">
           <div className="mb-2">
             <span className="text-orange-500 font-medium text-sm uppercase tracking-wider">
               {category === "Смартфоны" ? t('category.smartphones') : category === "Аксессуары" ? t('category.accessories') : category}

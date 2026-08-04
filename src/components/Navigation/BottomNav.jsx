@@ -45,13 +45,13 @@ const BottomNav = () => {
 
   return (
     <div className="md:hidden fixed bottom-2 left-2 right-2 z-50 bg-white/95 backdrop-blur-xl border border-gray-100 shadow-[0_10px_35px_rgba(0,0,0,0.12)] rounded-2xl px-1.5 py-2 pb-[calc(0.6rem+env(safe-area-inset-bottom))]">
-      <div className="flex items-center justify-between gap-1">
+      <div className="flex items-center justify-between gap-1.5">
         {navItems.map((item) => (
           <NavLink
             key={item.to}
             to={item.to}
             className={({ isActive }) =>
-              `flex flex-1 flex-col items-center justify-center py-1.5 px-1.5 rounded-xl transition-all duration-300 relative min-w-0 ${
+              `flex flex-1 flex-col items-center justify-center py-2 px-1 rounded-xl transition-all duration-300 relative min-w-0 ${
                 isActive
                   ? "text-orange-500 font-bold scale-110"
                   : "text-gray-400 hover:text-gray-600"
@@ -63,7 +63,7 @@ const BottomNav = () => {
                 <div className={`transition-transform duration-300 ${isActive ? 'scale-110' : ''}`}>
                   {item.icon}
                 </div>
-                <span className={`text-[10px] sm:text-[11px] mt-1 tracking-tight font-medium leading-none truncate max-w-full ${isActive ? 'text-orange-500' : 'text-gray-500'}`}>
+                <span className={`text-[10px] mt-1 tracking-tight font-medium leading-none truncate max-w-full ${isActive ? 'text-orange-500' : 'text-gray-500'}`}>
                   {item.label}
                 </span>
                 {isActive && (
@@ -78,14 +78,14 @@ const BottomNav = () => {
           href="https://wa.me/996551383739"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-1 flex-col items-center justify-center py-1.5 px-1.5 text-green-500 hover:text-green-600 transition-all duration-300 active:scale-95 min-w-0"
+          className="flex flex-1 flex-col items-center justify-center py-2 px-1 text-green-500 hover:text-green-600 transition-all duration-300 active:scale-95 min-w-0"
         >
           <div className="w-9 h-9 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center">
             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
             </svg>
           </div>
-          <span className="text-[10px] sm:text-[11px] mt-1 text-green-600 font-semibold leading-none">WhatsApp</span>
+          <span className="text-[10px] mt-1 text-green-600 font-semibold leading-none">WhatsApp</span>
         </a>
       </div>
     </div>
