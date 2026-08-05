@@ -127,7 +127,7 @@ const PhonesCard = ({ phone }) => {
   return (
     <div className="group relative bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden">
       {!isInStock && (
-        <div className="absolute top-3 right-3 z-10 bg-red-500 text-white px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-semibold">
+        <div className="absolute top-3 right-14 z-10 bg-red-500 text-white px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-semibold">
           {t('product.outofstock')}
         </div>
       )}
