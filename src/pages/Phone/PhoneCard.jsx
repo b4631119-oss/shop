@@ -253,7 +253,7 @@ const PhoneCard = ({ phone }) => {
             </button>
           </div>
 
-          <Link to="/" className="inline-block mt-6 text-orange-500 hover:text-orange-600 font-medium">
+          <Link to="/" className="inline-block mt-6 bg-orange-400 hover:bg-orange-600 text-white font-medium px-4 py-2 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-300">
             {t('detail.back') || '← Назад к каталогу'}
           </Link>
         </div>
