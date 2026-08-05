@@ -15,7 +15,6 @@ const FavoritesCard = ({ phone, onRemove }) => {
     if (phone && images && images.length > 0) {
       const url = getImageUrl(phone, images[0]);
       setImageUrl(url);
-      console.log('🖼️ FavoritesCard URL:', url);
     }
   }, [phone, images]);
 
@@ -45,6 +44,8 @@ const FavoritesCard = ({ phone, onRemove }) => {
           <img 
             src={imageUrl || 'https://placehold.co/400x400/e2e8f0/94a3b8?text=Нет+фото'} 
             alt={name} 
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500"
             onError={(e) => {
               e.target.src = 'https://placehold.co/400x400/e2e8f0/94a3b8?text=Нет+фото';

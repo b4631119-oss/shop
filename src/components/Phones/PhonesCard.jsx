@@ -1,7 +1,7 @@
 // src/components/PhonesCard/PhonesCard.jsx
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import swal from "sweetalert";
 import { useTranslation } from '../../hook/useTranslation';
 
@@ -17,7 +17,7 @@ const PhonesCard = ({ phone }) => {
   const imageRef = useRef(null);
   
   // ✅ Правильно собираем все URL фото
-  const imageList = (() => {
+  const imageList = useMemo(() => {
     if (!images || !Array.isArray(images) || images.length === 0) {
       return [];
     }
@@ -33,7 +33,7 @@ const PhonesCard = ({ phone }) => {
         return null;
       })
       .filter(Boolean);
-  })();
+  }, [images]);
 
   // Проверяем избранное
   useEffect(() => {
@@ -51,10 +51,12 @@ const PhonesCard = ({ phone }) => {
     return new Intl.NumberFormat('ru-RU').format(price);
   };
 
-  const whatsappMessage = t('whatsapp.msg')
-    .replace('{name}', name || '')
-    .replace('{price}', formatPrice(price));
-  const whatsappLink = `https://wa.me/996551383739?text=${encodeURIComponent(whatsappMessage)}`;
+  const whatsappLink = useMemo(() => {
+    const whatsappMessage = t('whatsapp.msg')
+      .replace('{name}', name || '')
+      .replace('{price}', formatPrice(price));
+    return `https://wa.me/996551383739?text=${encodeURIComponent(whatsappMessage)}`;
+  }, [name, price, t]);
 
   const handleToggleFavorite = (e) => {
     e.preventDefault();
@@ -163,6 +165,8 @@ const PhonesCard = ({ phone }) => {
               <img 
                 src={imageList[currentImageIndex] || 'https://placehold.co/400x400/e2e8f0/94a3b8?text=Нет+фото'} 
                 alt={name} 
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500 pointer-events-none"
                 onError={(e) => {
                   e.target.src = 'https://placehold.co/400x400/e2e8f0/94a3b8?text=Нет+фото';
@@ -208,6 +212,8 @@ const PhonesCard = ({ phone }) => {
             <img 
               src="https://placehold.co/400x400/e2e8f0/94a3b8?text=Нет+фото" 
               alt={name} 
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-contain p-4"
             />
           )}

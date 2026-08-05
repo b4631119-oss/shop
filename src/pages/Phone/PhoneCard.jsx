@@ -1,6 +1,6 @@
 // src/pages/Phone/PhoneCard.jsx
 import PropTypes from 'prop-types';
-import { useState, useRef } from 'react';
+import { useMemo, useState, useRef } from 'react';
 import swal from "sweetalert";
 import { Link } from "react-router-dom";
 import { useTranslation } from '../../hook/useTranslation';
@@ -16,7 +16,7 @@ const PhoneCard = ({ phone }) => {
   const imageRef = useRef(null);
   
   // ✅ Правильно собираем все URL фото
-  const imageList = (() => {
+  const imageList = useMemo(() => {
     if (!images || !Array.isArray(images) || images.length === 0) {
       return [];
     }
@@ -32,7 +32,7 @@ const PhoneCard = ({ phone }) => {
         return null;
       })
       .filter(Boolean);
-  })();
+  }, [images]);
 
   const handleAddToFavorites = () => {
     const favoriteItems = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -51,10 +51,12 @@ const PhoneCard = ({ phone }) => {
     return new Intl.NumberFormat('ru-RU').format(price);
   };
 
-  const whatsappMessage = t('whatsapp.msg')
-    .replace('{name}', name || '')
-    .replace('{price}', formatPrice(price));
-  const whatsappLink = `https://wa.me/996551383739?text=${encodeURIComponent(whatsappMessage)}`;
+  const whatsappLink = useMemo(() => {
+    const whatsappMessage = t('whatsapp.msg')
+      .replace('{name}', name || '')
+      .replace('{price}', formatPrice(price));
+    return `https://wa.me/996551383739?text=${encodeURIComponent(whatsappMessage)}`;
+  }, [name, price, t]);
 
   // Навигация
   const handlePrevImage = () => {
@@ -125,6 +127,8 @@ const PhoneCard = ({ phone }) => {
               <img 
                 src={imageList[currentImageIndex] || 'https://placehold.co/600x600/e2e8f0/94a3b8?text=Нет+фото'} 
                 alt={name} 
+                loading="lazy"
+                decoding="async"
                 className="w-full h-auto object-contain transform hover:scale-105 transition-transform duration-500 pointer-events-none"
                 onError={(e) => {
                   e.target.src = 'https://placehold.co/600x600/e2e8f0/94a3b8?text=Нет+фото';

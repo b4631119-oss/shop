@@ -16,8 +16,6 @@ const Home = () => {
     getProducts()
       .then(data => {
         if (isMounted) {
-          console.log('✅ Товары загружены:', data);
-          console.log('📦 Количество товаров:', data.length);
           setPhones(data);
           setLoading(false);
         }

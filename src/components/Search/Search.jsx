@@ -86,6 +86,8 @@ const Search = ({ phones = [] }) => {
               <img 
                 src={getImageUrl(phone, phone.images?.[0]) || 'https://placehold.co/400x400/e2e8f0/94a3b8?text=Нет+фото'} 
                 alt={phone.name} 
+                loading="lazy"
+                decoding="async"
                 className="w-12 h-12 object-contain rounded-lg bg-gray-50 p-1"
                 onError={(e) => {
                   e.target.src = 'https://placehold.co/400x400/e2e8f0/94a3b8?text=Нет+фото';
